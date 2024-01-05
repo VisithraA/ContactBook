@@ -1,5 +1,6 @@
 package com.visithraa23.contacts.screens.addcontact;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class AddContactView {
@@ -8,7 +9,7 @@ public class AddContactView {
 	public AddContactView() {
 		addContactViewModel=new AddContactViewModel(this);
 	}
-	public void addContact() {
+	public void addContact() throws SQLException {
 		Scanner sc=new Scanner(System.in);
 		System.out.print("Enter Name : ");
 		String name=sc.nextLine();
@@ -16,6 +17,9 @@ public class AddContactView {
 		String phoneNumber=sc.nextLine();
 		addContactViewModel.addContact(name,phoneNumber);
 		
+	}
+	public void printOutput(String output) {
+		System.out.println(output);
 	}
 
 }
