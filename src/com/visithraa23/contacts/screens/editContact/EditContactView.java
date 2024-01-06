@@ -45,4 +45,8 @@ public class EditContactView {
 		}
 	}
 
+	public void printOutput(String output) {
+		System.out.println(output);
+	}
+
 }

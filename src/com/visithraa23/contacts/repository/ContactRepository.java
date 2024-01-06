@@ -48,19 +48,46 @@ public class ContactRepository {
 	}
 
 	public ResultSet findContact(String contact) throws SQLException {
-		PreparedStatement preparedStatement=connection.prepareStatement("select * from contacts where contactName='contact' or contactNumber='contact'");
+		PreparedStatement preparedStatement = connection
+				.prepareStatement("select * from contacts where contactName=? or contactNumber=?");
+		preparedStatement.setString(1, contact);
+		preparedStatement.setString(2, contact);
 		return preparedStatement.executeQuery();
-		
+
 	}
 
 	public void deleteContact(String contact) throws SQLException {
 		PreparedStatement preparedStatement = connection
-				.prepareStatement("delete from contacts where contactName='contact' or contactNumber='contact'");
+				.prepareStatement("delete from contacts where contactName=? or contactNumber=?");
+		preparedStatement.setString(1, contact);
+		preparedStatement.setString(2, contact);
 		preparedStatement.executeUpdate();
 	}
 
 	public ResultSet showContacts() throws SQLException {
-		PreparedStatement preparedStatement=connection.prepareStatement("select * from contacts");
+		PreparedStatement preparedStatement = connection.prepareStatement("select * from contacts");
+		return preparedStatement.executeQuery();
+	}
+
+	public static void editContactName(int selectId, String contactUpdate) throws SQLException {
+		PreparedStatement preparedStatement = connection
+				.prepareStatement("update contacts set contactName=? where contactId=?");
+		preparedStatement.setString(1, contactUpdate);
+		preparedStatement.setInt(2, selectId);
+		preparedStatement.executeUpdate();
+	}
+
+	public static void editContactNumber(int selectId, String contactUpdate) throws SQLException {
+		PreparedStatement preparedStatement = connection
+				.prepareStatement("update contacts set contactNumber=? where contactId=?");
+		preparedStatement.setString(1, contactUpdate);
+		preparedStatement.setInt(2, selectId);
+		preparedStatement.executeUpdate();
+	}
+
+	public ResultSet findId(int selectId) throws SQLException {
+		PreparedStatement preparedStatement = connection.prepareStatement("select * from contacts where contactId=?");
+		preparedStatement.setInt(1, selectId);
 		return preparedStatement.executeQuery();
 	}
 
